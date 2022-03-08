@@ -51,4 +51,14 @@ document.addEventListener("turbo:load", function () {
   document.querySelectorAll('pre code').forEach((block) => {
     hljs.highlightElement(block);
   });
+
+  let autosaveKeyupTimer
+  document.addEventListener('keyup', (event) => {
+    if (event.target.form.classList.contains('autosave')) {
+      clearTimeout(autosaveKeyupTimer)
+      autosaveKeyupTimer = setTimeout(() => {
+        event.target.form.requestSubmit()
+      }, 1000)
+    }
+  })
 });
